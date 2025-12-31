@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 🎉</title>
+
+<style>
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+  color: #333;
+  text-align: center;
+}
+
+/* Falling hearts & flowers */
+.fall {
+  position: fixed;
+  top: -10%;
+  font-size: 24px;
+  animation: fall linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* Blinking stars */
+.star {
+  position: fixed;
+  color: gold;
+  font-size: 16px;
+  animation: blink 1.5s infinite;
+  z-index: 1;
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Main container */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 5;
+  position: relative;
+}
+
+/* Card style */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  width: 360px;
+}
+
+/* Images */
+img {
+  width: 200px;
+  margin: 15px 0;
+  border-radius: 20px;
+  animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Buttons */
+button {
+  padding: 12px 30px;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  background: #ff69b4;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff1493;
+  transform: scale(1.1);
+}
+
+.yes { background:#ff69b4; }
+.no { background:#ff4d6d; }
+.back { background:#ddd; color:#000; }
+
+.hidden { display: none; }
+
+/* Shake */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+.shake { animation: shake 0.5s; }
+
+/* Hearts pulse */
+.hearts {
+  font-size: 24px;
+  animation: heartbeat 1s infinite;
+}
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background effects -->
+<script>
+const emojis = ["❤️","🌸","💖","🌺","💐"];
+for(let i=0;i<30;i++){
+  let el=document.createElement("div");
+  el.className="fall";
+  el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.left=Math.random()*100+"vw";
+  el.style.animationDuration=3+Math.random()*5+"s";
+  document.body.appendChild(el);
+}
+for(let i=0;i<20;i++){
+  let star=document.createElement("div");
+  star.className="star";
+  star.innerHTML="⭐";
+  star.style.top=Math.random()*100+"vh";
+  star.style.left=Math.random()*100+"vw";
+  document.body.appendChild(star);
+}
+</script>
+
+<!-- STEP 1 -->
+<div class="container" id="step1">
+  <div class="card">
+    <img src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg">
+    <h2>Ready for a cute New Year surprise? 🎊</h2>
+    <button class="no" id="noBtn">No 😑</button>
+    <button class="yes" id="yesBtn">Yes 😌</button>
+  </div>
+</div>
+
+<!-- NO STEP -->
+<div class="container hidden" id="noStep">
+  <div class="card">
+    <h2 class="shake">HOW DARE YOU 😤</h2>
+    <img src="https://cataas.com/cat/says/NOPE">
+    <button class="back" id="backBtn">⬅ Back</button>
+  </div>
+</div>
+
+<!-- YES STEP -->
+<div class="container hidden" id="yesStep">
+  <div class="card">
+    <h2>🎉 HAPPY NEW YEAR 2025 🎉</h2>
+    <p>
+      Tum bohot special ho 💖<br>
+      Khushiyan, success aur smiles tumhara intezar kar rahi hain 🌸
+    </p>
+    <button class="yes" id="openBtn">🎁 Open Surprise</button>
+    <button class="back" id="backBtn2">⬅ Back</button>
+  </div>
+</div>
+
+<!-- SURPRISE -->
+<div class="container hidden" id="surpriseStep">
+  <div class="card">
+    <h2>❤️ HAPPY NEW YEAR ❤️</h2>
+    <img src="https://cataas.com/cat/cute">
+    <div class="hearts">🎂 💖 💐 ⭐ ❤️</div>
+    <button class="back" id="backBtn3">⬅ Back</button>
+  </div>
+</div>
+
+<script>
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("noStep");
+const step3 = document.getElementById("yesStep");
+const step4 = document.getElementById("surpriseStep");
+
+document.getElementById("noBtn").addEventListener("click", ()=>{
+  step1.classList.add("hidden");
+  step2.classList.remove("hidden");
+});
+
+document.getElementById("yesBtn").addEventListener("click", ()=>{
+  step1.classList.add("hidden");
+  step3.classList.remove("hidden");
+});
+
+document.getElementById("backBtn").addEventListener("click", ()=>{
+  step2.classList.add("hidden");
+  step1.classList.remove("hidden");
+});
+
+document.getElementById("backBtn2").addEventListener("click", ()=>{
+  step3.classList.add("hidden");
+  step1.classList.remove("hidden");
+});
+
+document.getElementById("backBtn3").addEventListener("click", ()=>{
+  step4.classList.add("hidden");
+  step3.classList.remove("hidden");
+});
+
+document.getElementById("openBtn").addEventListener("click", ()=>{
+  step3.classList.add("hidden");
+  step4.classList.remove("hidden");
+});
+</script>
+
+</body>
+</html>
+
